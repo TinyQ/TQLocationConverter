@@ -1,7 +1,15 @@
 TQLocationConverter
 ===================
 
-Converter location to WGS-84 GCJ-02 
+##Converter location  
+
+用来相互转换不同标准坐标系
+
+（GCJ-02火星坐标）
+
+（WGS-84 正常GPS坐标）
+
+（百度坐标）
 
 
 ##How to use
