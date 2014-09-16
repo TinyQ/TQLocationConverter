@@ -11,8 +11,8 @@ Converter location to WGS-84 GCJ-02
 
     //我是个经纬度
     CLLocationCoordinate2D location = (CLLocationCoordinate2D){
-        .latitude = 0.0,
-        .longitude =0.0
+        .latitude  = 0.0,
+        .longitude = 0.0
     };
     
     //判断是否在中国
