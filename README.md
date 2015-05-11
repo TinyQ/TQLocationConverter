@@ -27,7 +27,7 @@ TQLocationConverter
     if ([TQLocationConverter isLocationOutOfChina:location])
     {
         //将WGS-84转为GCJ-02(火星坐标)
-        location = [TQLocationConverter transformFromBaiduToGCJ:location];
+        location = [TQLocationConverter transformFromWGSToGCJ:location];
         
         //将GCJ-02(火星坐标)转为百度坐标
         location = [TQLocationConverter transformFromGCJToBaidu:location];
