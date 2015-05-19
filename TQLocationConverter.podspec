@@ -8,13 +8,13 @@
 
 Pod::Spec.new do |s|
   s.name         = "TQLocationConverter"
-  s.version      = "v0.0.1"
+  s.version      = "0.0.1"
   s.summary      = "Converter CLLocation GCJ-02,WGS-84,Baidu."
   s.homepage     = "https://github.com/TinyQ/TQLocationConverter"
   s.license      = "MIT"
   s.author       = { "qfu" => "tinyqf@gmail.com" }
   s.platform     = :ios, "5.0"
-  s.source       = { :git => "https://github.com/TinyQ/TQLocationConverter", :tag => "v0.0.1" }
+  s.source       = { :git => "https://github.com/TinyQ/TQLocationConverter.git", :tag => "v0.0.1" }
   s.source_files = "TQLocationConverter.{h,m}"
   s.frameworks   = "CoreLocation"
   s.requires_arc = true
