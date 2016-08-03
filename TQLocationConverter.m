@@ -60,10 +60,10 @@ static const double xPi = M_PI  * 3000.0 / 180.0;
 
 +(CLLocationCoordinate2D)transformFromGCJToBaidu:(CLLocationCoordinate2D)p
 {
-    long double z = sqrt(p.longitude * p.longitude + p.latitude * p.latitude) + 0.00002 * sqrt(p.latitude * pi);
-    long double theta = atan2(p.latitude, p.longitude) + 0.000003 * cos(p.longitude * pi);
+    long double z = sqrt(p.longitude * p.longitude + p.latitude * p.latitude) + 0.00002 * sin(p.latitude * xPi);
+    long double theta = atan2(p.latitude, p.longitude) + 0.000003 * cos(p.longitude * xPi);
     CLLocationCoordinate2D geoPoint;
-    geoPoint.latitude  = (z * sin(theta) + 0.006);
+    geoPoint.latitude = (z * sin(theta) + 0.006);
     geoPoint.longitude = (z * cos(theta) + 0.0065);
     return geoPoint;
 }
