@@ -24,7 +24,7 @@ TQLocationConverter
     };
     
     //判断是否在中国
-    if ([TQLocationConverter isLocationOutOfChina:location])
+    if (![TQLocationConverter isLocationOutOfChina:location])
     {
         //将WGS-84转为GCJ-02(火星坐标)
         location = [TQLocationConverter transformFromWGSToGCJ:location];
