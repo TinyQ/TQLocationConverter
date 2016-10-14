@@ -19,23 +19,17 @@ static const double xPi = M_PI  * 3000.0 / 180.0;
 +(CLLocationCoordinate2D)transformFromWGSToGCJ:(CLLocationCoordinate2D)wgsLoc
 {
     CLLocationCoordinate2D adjustLoc;
-    if([self isLocationOutOfChina:wgsLoc])
-    {
-        adjustLoc = wgsLoc;
-    }
-    else
-    {
-        double adjustLat = [self transformLatWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];
-        double adjustLon = [self transformLonWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];
-        long double radLat = wgsLoc.latitude / 180.0 * pi;
-        long double magic = sin(radLat);
-        magic = 1 - ee * magic * magic;
-        long double sqrtMagic = sqrt(magic);
-        adjustLat = (adjustLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
-        adjustLon = (adjustLon * 180.0) / (a / sqrtMagic * cos(radLat) * pi);
-        adjustLoc.latitude = wgsLoc.latitude + adjustLat;
-        adjustLoc.longitude = wgsLoc.longitude + adjustLon;
-    }
+    double adjustLat = [self transformLatWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];
+    double adjustLon = [self transformLonWithX:wgsLoc.longitude - 105.0 withY:wgsLoc.latitude - 35.0];
+    long double radLat = wgsLoc.latitude / 180.0 * pi;
+    long double magic = sin(radLat);
+    magic = 1 - ee * magic * magic;
+    long double sqrtMagic = sqrt(magic);
+    adjustLat = (adjustLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
+    adjustLon = (adjustLon * 180.0) / (a / sqrtMagic * cos(radLat) * pi);
+    adjustLoc.latitude = wgsLoc.latitude + adjustLat;
+    adjustLoc.longitude = wgsLoc.longitude + adjustLon;
+
     return adjustLoc;
 }
 
