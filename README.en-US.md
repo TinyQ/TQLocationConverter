@@ -5,7 +5,7 @@ TQLocationConverter
 
 Used to convert different coordinate system standards to each other
 
-（GCJ-02 Mars coordinates)
+(GCJ-02 Mars coordinates)
 
 (WGS-84 normal GPS coordinates)
 
