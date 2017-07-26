@@ -1,16 +1,15 @@
 TQLocationConverter
 ===================
-[English](README.en-US.md)
 
-## Location converter  
+## Location converter
 
-用来相互转换不同标准坐标系
+Used to convert different coordinate system standards to each other
 
-（GCJ-02火星坐标）
+（GCJ-02 Mars coordinates)
 
-（WGS-84 正常GPS坐标）
+(WGS-84 normal GPS coordinates)
 
-（百度坐标）
+(Baidu coordinates)
 
 
 ## How to use
@@ -18,25 +17,25 @@ TQLocationConverter
 
 ```objective-c
 
-    //我是个经纬度
+    // latitiude and longitude
     CLLocationCoordinate2D location = (CLLocationCoordinate2D){
         .latitude  = 0.0,
         .longitude = 0.0
     };
     
-    //判断是否在中国
+    // determine if in China
     if (![TQLocationConverter isLocationOutOfChina:location])
     {
-        //将WGS-84转为GCJ-02(火星坐标)
+        // convert WGS-84 to GCJ-02 (Mars coordinates)
         location = [TQLocationConverter transformFromWGSToGCJ:location];
         
-        //将GCJ-02(火星坐标)转为百度坐标
+        // convert GCJ-02 (Mars coordinates) into Baidu coordinates
         location = [TQLocationConverter transformFromGCJToBaidu:location];
         
-        //将百度坐标转为GCJ-02(火星坐标)
+        // convert Baidu coordinates into GCJ-02 (Mars coordinates)
         location = [TQLocationConverter transformFromBaiduToGCJ:location];
         
-        //将GCJ-02(火星坐标)转为WGS-84
+        // convert GCJ-02 (Mars coordinates) to WGS-84 (normal GPS coordinates)
         location = [TQLocationConverter transformFromGCJToWGS:location];
     }
     
