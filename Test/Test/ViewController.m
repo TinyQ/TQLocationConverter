@@ -91,7 +91,7 @@
     result1 = [TQLocationConverter transformFromGCJToWGS:location];
     NSLog(@"GCJToWGS %f,%f,",result1.latitude,result1.longitude);
     
-    //将WGS-84(火星坐标)转为GCJ-02
+    //将WGS-84转为GCJ-02(火星坐标)
     result2 = [TQLocationConverter transformFromWGSToGCJ:result1];
     NSLog(@"WGSToGCJ %f,%f,",result2.latitude,result2.longitude);
     NSLog(@"\n");

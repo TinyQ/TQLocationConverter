@@ -15,26 +15,24 @@
 
 @implementation TestTests
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+- (void)testKnownCoordinateAndInverseRegression {
+    CLLocationCoordinate2D point = CLLocationCoordinate2DMake(35.25, 114.25);
+    CLLocationCoordinate2D gcj = [TQLocationConverter transformFromWGSToGCJ:point];
+    CLLocationCoordinate2D back = [TQLocationConverter transformFromGCJToWGS:gcj];
+    XCTAssertEqualWithAccuracy(gcj.latitude, 35.249540255704204, 1e-11);
+    XCTAssertEqualWithAccuracy(gcj.longitude, 114.255859407090739, 1e-11);
+    XCTAssertEqualWithAccuracy(back.latitude, point.latitude, 1e-8);
+    XCTAssertEqualWithAccuracy(back.longitude, point.longitude, 1e-8);
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
-}
-
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testCheckedAPIRejectsInvalidInput {
+    NSError *error = nil;
+    CLLocationCoordinate2D result = [TQLocationConverter
+        convertCoordinate:kCLLocationCoordinate2DInvalid
+        from:TQCoordinateSystemWGS84 to:TQCoordinateSystemGCJ02
+        regionPolicy:TQRegionPolicyMainlandChina error:&error];
+    XCTAssertFalse(CLLocationCoordinate2DIsValid(result));
+    XCTAssertEqual(error.code, TQConversionErrorInvalidCoordinate);
 }
 
 -(void)testIsLocationOutOfChina{

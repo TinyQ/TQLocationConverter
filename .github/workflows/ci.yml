@@ -1,0 +1,73 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  repository:
+    name: Repository hygiene and documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - run: python3 Scripts/check-repository.py
+      - run: python3 Scripts/check-docs.py
+  cocoapods:
+    name: CocoaPods / all platforms and consumer integration
+    runs-on: macos-15
+    env:
+      # Keep validating the declared minimum targets with an SDK that supports them.
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      COCOAPODS_DISABLE_STATS: 'true'
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@14594264cd68ce8a2345dd349bc3d138a4ef85c8 # v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - run: xcodebuild -version
+      - name: Build and import all declared CocoaPods platforms
+        run: bundle exec pod lib lint TQLocationConverter.podspec
+      - name: Run independent Objective-C and Swift consumers in three linkage modes
+        run: bundle exec ruby Scripts/test-cocoapods.rb
+  apple:
+    name: Apple / Swift and Objective-C
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - run: swift --version
+      - run: swift test
+      - run: swift test -c release
+      - run: bash Scripts/test-objc.sh
+      - name: iOS package build
+        run: xcodebuild -scheme TQLocationConverter -destination 'generic/platform=iOS' -derivedDataPath .build/ios CODE_SIGNING_ALLOWED=NO build
+      - name: iOS Objective-C package build
+        run: xcodebuild -scheme TQLocationConverterObjC -destination 'generic/platform=iOS' -derivedDataPath .build/ios-objc CODE_SIGNING_ALLOWED=NO build
+      - name: DocC
+        run: xcodebuild -scheme TQLocationConverter -destination 'generic/platform=macOS' -derivedDataPath .build/docc CODE_SIGNING_ALLOWED=NO docbuild
+  linux:
+    name: Linux / Swift ${{ matrix.swift }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        swift: ['6.0', '6.2']
+    container: swift:${{ matrix.swift }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - run: swift --version
+      - run: swift test
+      - run: swift test -c release

@@ -24,3 +24,19 @@ DerivedData
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
 #
 # Pods/
+
+# SwiftPM, DocC, local metadata
+.build/
+.swiftpm/
+*.doccarchive/
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+__MACOSX/
+__pycache__/
+*.py[cod]
+
+# Local Ruby tooling
+.bundle/
+vendor/bundle/
