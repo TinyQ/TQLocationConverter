@@ -1,0 +1,24 @@
+name: Bug report / 问题反馈
+description: Report a reproducible conversion or integration issue / 报告可复现的问题
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment / 环境
+      description: Swift/Xcode, OS, library revision and integration method.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction / 复现
+      description: Public sample coordinates, source/destination systems, region policy and minimal code. Do not include private location data.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual / 预期与实际
+      description: Include the source of any expected coordinates and the error tolerance.
+    validations:
+      required: true

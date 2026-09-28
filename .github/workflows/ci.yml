@@ -1,0 +1,45 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  apple:
+    name: Apple / Swift and Objective-C
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - run: swift --version
+      - run: swift test
+      - run: swift test -c release
+      - run: bash Scripts/test-objc.sh
+      - run: python3 Scripts/check-docs.py
+      - name: iOS package build
+        run: xcodebuild -scheme TQLocationConverter -destination 'generic/platform=iOS' -derivedDataPath .build/ios CODE_SIGNING_ALLOWED=NO build
+      - name: iOS Objective-C package build
+        run: xcodebuild -scheme TQLocationConverterObjC -destination 'generic/platform=iOS' -derivedDataPath .build/ios-objc CODE_SIGNING_ALLOWED=NO build
+      - name: DocC
+        run: xcodebuild -scheme TQLocationConverter -destination 'generic/platform=macOS' -derivedDataPath .build/docc CODE_SIGNING_ALLOWED=NO docbuild
+  linux:
+    name: Linux / Swift ${{ matrix.swift }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        swift: ['6.0', '6.2']
+    container: swift:${{ matrix.swift }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          persist-credentials: false
+      - run: swift --version
+      - run: swift test
+      - run: swift test -c release
