@@ -85,13 +85,15 @@ Constructing a `Coordinate` does not throw. Check `isValid` early if useful; con
 
 **Manual:** add the root `TQLocationConverter.h` and `.m` to your application target and link Foundation and CoreLocation. UIKit is not needed; ARC is recommended.
 
-**CocoaPods:** validate a local checkout with:
+**CocoaPods:** install the Objective-C implementation from its Git tag:
 
 ```ruby
-pod 'TQLocationConverter', :path => '../TQLocationConverter'
+pod 'TQLocationConverter',
+    :git => 'https://github.com/TinyQ/TQLocationConverter.git',
+    :tag => '1.0.0'
 ```
 
-The podspec is prepared for a future `1.0.0` release and points to tag `1.0.0`. That tag and a trunk release have not been published. Do not depend on `pod 'TQLocationConverter', '~> 1.0'` before publication. The native Swift implementation is distributed through SwiftPM.
+Run `pod install` and open the generated `.xcworkspace`. For local development, use `pod 'TQLocationConverter', :path => '../TQLocationConverter'`. This version is distributed through its Git tag and has not been published to CocoaPods trunk, so keep both `:git` and `:tag`. The native Swift implementation is distributed through SwiftPM.
 
 ```objc
 NSError *error = nil;

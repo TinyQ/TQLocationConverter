@@ -1,6 +1,6 @@
 # Changelog / 变更记录
 
-## Unreleased — preparing 1.0.0 / 准备发布 1.0.0
+## 1.0.0 — 2026-09-28
 
 ### Added / 新增
 
@@ -24,8 +24,8 @@
 - Modern distribution targets Swift 6, iOS 13, macOS 10.15, tvOS 13, watchOS 6 and visionOS 1.
   现代分发包提高最低工具链和系统要求；旧 Objective‑C 方法签名与不自动判断地域的行为保留。
 
-No new release tag or CocoaPods trunk publication has been made. The podspec version is a release candidate configuration.
-尚未创建新版本 tag 或发布 CocoaPods；podspec 版本仅用于准备发布。
+Distribution: SwiftPM version `1.0.0`, or the same Git tag for the Objective-C CocoaPod. This version is not published to CocoaPods trunk.
+分发方式：SwiftPM `1.0.0` 版本依赖，或 Objective-C CocoaPod 的同名 Git 标签；此版本未发布到 CocoaPods trunk。
 
 ## Legacy / 历史
 

@@ -17,7 +17,7 @@
 | 实现 | 接入方式 | 支持范围 |
 | --- | --- | --- |
 | Swift | Swift Package Manager，产品 `TQLocationConverter` | Swift 6.0+；iOS 13+、macOS 10.15+、tvOS 13+、watchOS 6+、visionOS 1+；Linux 核心 |
-| Objective‑C | SwiftPM 产品 `TQLocationConverterObjC`、本地 CocoaPods、手动复制 | 上述 Apple 平台；不依赖 UIKit |
+| Objective‑C | SwiftPM 产品 `TQLocationConverterObjC`、CocoaPods Git 标签、手动复制 | 上述 Apple 平台；不依赖 UIKit |
 
 Xcode：**File → Add Package Dependencies**，输入：
 
@@ -25,11 +25,11 @@ Xcode：**File → Add Package Dependencies**，输入：
 https://github.com/TinyQ/TQLocationConverter.git
 ```
 
-当前开发版选择 `master` 分支。审查尚未合并的改动时选择对应分支，或把该 checkout 作为本地包添加。仓库尚未发布现代版本 tag；正式发布后建议固定语义版本。
+选择 **Up to Next Major Version**，最低版本填 `1.0.0`。在 `Package.swift` 中使用语义版本依赖：
 
 ```swift
 // 你的 Package.swift
-.package(url: "https://github.com/TinyQ/TQLocationConverter.git", branch: "master")
+.package(url: "https://github.com/TinyQ/TQLocationConverter.git", from: "1.0.0")
 // 消费 target 的 dependencies 中添加：
 .product(name: "TQLocationConverter", package: "TQLocationConverter")
 ```

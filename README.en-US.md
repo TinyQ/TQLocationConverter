@@ -17,7 +17,7 @@ A lightweight, offline library for converting **WGS‑84, GCJ‑02 and BD‑09LL
 | Implementation | Integration | Supported platforms |
 | --- | --- | --- |
 | Swift | Swift Package Manager product `TQLocationConverter` | Swift 6.0+; iOS 13+, macOS 10.15+, tvOS 13+, watchOS 6+, visionOS 1+; Linux core |
-| Objective‑C | SwiftPM product `TQLocationConverterObjC`, local CocoaPods, manual copying | The Apple platforms above; no UIKit dependency |
+| Objective‑C | SwiftPM product `TQLocationConverterObjC`, CocoaPods Git tag, manual copying | The Apple platforms above; no UIKit dependency |
 
 In Xcode, choose **File → Add Package Dependencies** and enter:
 
@@ -25,11 +25,11 @@ In Xcode, choose **File → Add Package Dependencies** and enter:
 https://github.com/TinyQ/TQLocationConverter.git
 ```
 
-Select the `master` branch for the development version. To review an unmerged change, select its branch or add its checkout as a local package. No modern version tag has been published yet; prefer a semantic version dependency after the first release.
+Select **Up to Next Major Version** with minimum version `1.0.0`. In `Package.swift`, use a semantic version dependency:
 
 ```swift
 // In your Package.swift:
-.package(url: "https://github.com/TinyQ/TQLocationConverter.git", branch: "master")
+.package(url: "https://github.com/TinyQ/TQLocationConverter.git", from: "1.0.0")
 // In the consuming target's dependencies:
 .product(name: "TQLocationConverter", package: "TQLocationConverter")
 ```

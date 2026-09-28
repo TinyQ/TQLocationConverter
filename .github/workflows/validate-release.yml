@@ -1,0 +1,41 @@
+name: Validate release
+on:
+  push:
+    tags: ['[0-9]*.[0-9]*.[0-9]*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published Git tag to validate (for example 1.0.0)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  distribution:
+    name: Remote SwiftPM and CocoaPods installation
+    runs-on: macos-15
+    timeout-minutes: 20
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      COCOAPODS_DISABLE_STATS: 'true'
+      RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: refs/tags/${{ inputs.tag || github.ref_name }}
+          persist-credentials: false
+      - uses: ruby/setup-ruby@14594264cd68ce8a2345dd349bc3d138a4ef85c8 # v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Check the podspec version and source tag
+        run: |
+          bundle exec ruby -r cocoapods -e '
+            spec = Pod::Specification.from_file("TQLocationConverter.podspec")
+            tag = ENV.fetch("RELEASE_TAG")
+            abort "Tag does not match the podspec" unless spec.version.to_s == tag && spec.source[:tag] == tag
+          '
+      - name: Resolve the tag and run an independent SwiftPM consumer
+        run: python3 Scripts/test-swiftpm-release.py "$RELEASE_TAG"
+      - name: Download and build the CocoaPods tag on all declared platforms
+        run: bundle exec pod spec lint TQLocationConverter.podspec
