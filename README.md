@@ -25,11 +25,11 @@ Xcode：**File → Add Package Dependencies**，输入：
 https://github.com/TinyQ/TQLocationConverter.git
 ```
 
-选择 **Up to Next Major Version**，最低版本填 `1.0.0`。在 `Package.swift` 中使用语义版本依赖：
+选择 **Up to Next Major Version**，最低版本填 `1.0.1`。在 `Package.swift` 中使用语义版本依赖：
 
 ```swift
 // 你的 Package.swift
-.package(url: "https://github.com/TinyQ/TQLocationConverter.git", from: "1.0.0")
+.package(url: "https://github.com/TinyQ/TQLocationConverter.git", from: "1.0.1")
 // 消费 target 的 dependencies 中添加：
 .product(name: "TQLocationConverter", package: "TQLocationConverter")
 ```

@@ -37,6 +37,13 @@ CI 使用 Xcode 16.4 检查声明的最低部署版本；构建检查不代表�
 
 仓库检查基于 Git 跟踪清单，会拦截 `.DS_Store`、构建缓存和 IDE 私人设置，即使文件是用 `git add -f` 加入的。
 
+## 源码结构
+
+- `Sources/TQLocationConverter/`：原生 Swift 实现及 DocC。
+- `Sources/TQLocationConverterObjC/`：Objective-C 实现；`include/` 保存公开头文件和 SwiftPM umbrella header。
+- `Tests/`：自动化测试与独立消费示例。
+- `Test/`：早期 iOS 示例工程，CI 会构建其应用和测试 bundle。
+
 ## 修改算法
 
 1. 明确改变的是正向模型、逆变换求解还是地域策略。不要把往返误差当作真实精度。

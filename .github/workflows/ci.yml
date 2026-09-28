@@ -35,6 +35,8 @@ jobs:
           ruby-version: '3.4'
           bundler-cache: true
       - run: xcodebuild -version
+      - name: Build the legacy example and its test bundle
+        run: xcodebuild -project Test/Test.xcodeproj -scheme Test -destination 'generic/platform=iOS Simulator' -derivedDataPath .build/legacy-example CODE_SIGNING_ALLOWED=NO build-for-testing
       - name: Build and import all declared CocoaPods platforms
         run: bundle exec pod lib lint TQLocationConverter.podspec
       - name: Run independent Objective-C and Swift consumers in three linkage modes

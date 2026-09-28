@@ -17,13 +17,6 @@ var targets: [Target] = [
   targets.append(
     .target(
       name: "TQLocationConverterObjC",
-      path: ".",
-      exclude: [
-        "Sources", "Tests", "Benchmarks", "Test", "Documentation", "Scripts", "README.md",
-        "README.en-US.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md", "CONTRIBUTING.en-US.md",
-        "TQLocationConverter.podspec", "Gemfile", "Gemfile.lock",
-      ],
-      sources: ["TQLocationConverter.m"],
       publicHeadersPath: "include",
       linkerSettings: [.linkedFramework("Foundation"), .linkedFramework("CoreLocation")]
     ))
