@@ -10,6 +10,8 @@
   显式坐标系、地域策略、错误处理与 WGS‑84 ⇄ BD‑09LL 组合转换。
 - Bilingual guides, algorithm research, DocC, contribution workflow, CI and reproducible benchmarks.
   双语文档、算法调研、DocC、贡献流程、CI 与可复现基准。
+- CocoaPods validation for all five Apple platforms, independent Objective-C/Swift consumers in three linkage modes, locked development tooling and a CI check against tracked local metadata.
+  CocoaPods 五平台验证、三种链接方式下独立的 Objective-C/Swift 消费项目、锁定的开发工具依赖及防止缓存误提交的 CI 检查。
 
 ### Changed / 调整
 

@@ -1,4 +1,8 @@
+#if __has_include(<TQLocationConverter/TQLocationConverter.h>)
+#import <TQLocationConverter/TQLocationConverter.h>
+#else
 #import "TQLocationConverter.h"
+#endif
 #import <math.h>
 #import <stdio.h>
 #import <stdlib.h>
@@ -57,7 +61,7 @@ int main(void) {
         CHECK(error.code == TQConversionErrorInvalidResult);
         CHECK(!CLLocationCoordinate2DIsValid([TQLocationConverter transformFromGCJToWGS:CLLocationCoordinate2DMake(INFINITY, 0)]));
         CHECK([TQLocationConverter isLocationOutOfChina:kCLLocationCoordinate2DInvalid]);
-        puts("Objective-C: legacy APIs, checked errors, region behavior and manual integration passed.");
+        puts("Objective-C: legacy APIs, checked errors and region behavior passed.");
     }
     return 0;
 }

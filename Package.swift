@@ -21,7 +21,7 @@ var targets: [Target] = [
       exclude: [
         "Sources", "Tests", "Benchmarks", "Test", "Documentation", "Scripts", "README.md",
         "README.en-US.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md", "CONTRIBUTING.en-US.md",
-        "TQLocationConverter.podspec",
+        "TQLocationConverter.podspec", "Gemfile", "Gemfile.lock",
       ],
       sources: ["TQLocationConverter.m"],
       publicHeadersPath: "include",

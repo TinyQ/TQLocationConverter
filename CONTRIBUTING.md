@@ -13,12 +13,29 @@ swift test
 swift test -c release
 swift run -c release ConversionBenchmark
 python3 Scripts/check-docs.py
+python3 Scripts/check-repository.py
 # macOS
 bash Scripts/test-objc.sh
 xcrun swift-format lint --strict --recursive Package.swift Sources Tests Benchmarks
 ```
 
 格式化：`xcrun swift-format format --in-place --recursive Package.swift Sources Tests Benchmarks`。CI 在 macOS 运行两种语言的测试，在 Linux 检查 Swift 6.0 与 6.2。
+
+### CocoaPods 集成验证
+
+修改 Objective-C、podspec 或接入方式时，使用 Ruby 3.4、Bundler 和 Xcode 16.4 运行：
+
+```sh
+bundle install
+bundle exec pod lib lint TQLocationConverter.podspec
+bundle exec ruby Scripts/test-cocoapods.rb
+```
+
+`Gemfile.lock` 固定的是开发工具依赖，转换库没有第三方运行时依赖。Lint 构建并检查全部五个 Apple 平台；独立 macOS 消费项目通过静态库、静态 framework、动态 framework 三种方式安装 CocoaPods，并分别编译运行 Objective-C 与 Swift 调用代码。生成文件位于 `.build/cocoapods/`。单独验证一种方式可传入 `static-library`、`static-framework` 或 `dynamic-framework`。
+
+CI 使用 Xcode 16.4 检查声明的最低部署版本；构建检查不代表在所有旧系统上执行过测试。较新的 Xcode 可能不再接受这些最低部署版本。例如，在 Xcode 27 上进行本地消费项目测试时，可使用 `TQ_TEST_MACOS_DEPLOYMENT_TARGET=12.0 bundle exec ruby Scripts/test-cocoapods.rb`；这只覆盖本次消费项目构建参数，不修改库的系统要求，也不替代最低版本的 CI 检查。完整 lint 还需要对应平台的模拟器 runtime。
+
+仓库检查基于 Git 跟踪清单，会拦截 `.DS_Store`、构建缓存和 IDE 私人设置，即使文件是用 `git add -f` 加入的。
 
 ## 修改算法
 

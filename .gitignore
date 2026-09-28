@@ -30,3 +30,13 @@ DerivedData
 .swiftpm/
 *.doccarchive/
 .DS_Store
+._*
+Thumbs.db
+desktop.ini
+__MACOSX/
+__pycache__/
+*.py[cod]
+
+# Local Ruby tooling
+.bundle/
+vendor/bundle/
