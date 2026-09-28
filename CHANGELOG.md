@@ -1,5 +1,14 @@
 # Changelog / 变更记录
 
+## 1.0.1 — 2026-09-28
+
+- Move Objective-C implementation and public headers into `Sources/TQLocationConverterObjC/`, alongside the native Swift target. Simplify the SwiftPM manifest and update CocoaPods, manual integration and the legacy example.
+  Objective-C 实现与公开头文件迁入 `Sources/TQLocationConverterObjC/`，与 Swift target 并列；简化 SwiftPM 配置，同步 CocoaPods、手动接入和旧示例工程。
+- Preserve public API, module/header names and coordinate algorithms. Projects referencing the old repository paths directly must update those paths; published `1.0.0` files stay available at that tag.
+  公开接口、模块/头文件名和算法保持一致。直接引用旧仓库路径的项目需更新路径；已发布的 `1.0.0` 文件仍可从该标签获取。
+- Add a CI build of the legacy iOS example and its test bundle to catch stale source references.
+  CI 增加旧 iOS 示例与测试 bundle 的构建，检查源码引用是否有效。
+
 ## 1.0.0 — 2026-09-28
 
 ### Added / 新增

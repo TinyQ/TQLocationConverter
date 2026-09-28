@@ -83,14 +83,14 @@ Constructing a `Coordinate` does not throw. Check `isValid` early if useful; con
 
 **SwiftPM:** select the separate product `TQLocationConverterObjC` and use `@import TQLocationConverterObjC;`. The Swift and Objective‑C products are independent; you do not need to link both.
 
-**Manual:** add the root `TQLocationConverter.h` and `.m` to your application target and link Foundation and CoreLocation. UIKit is not needed; ARC is recommended.
+**Manual:** copy [TQLocationConverter.h](../Sources/TQLocationConverterObjC/include/TQLocationConverter.h) and [TQLocationConverter.m](../Sources/TQLocationConverterObjC/TQLocationConverter.m) into your application target and link Foundation and CoreLocation. The two files can live together in your app; the SwiftPM umbrella header is not needed. UIKit is not needed; ARC is recommended.
 
 **CocoaPods:** install the Objective-C implementation from its Git tag:
 
 ```ruby
 pod 'TQLocationConverter',
     :git => 'https://github.com/TinyQ/TQLocationConverter.git',
-    :tag => '1.0.0'
+    :tag => '1.0.1'
 ```
 
 Run `pod install` and open the generated `.xcworkspace`. For local development, use `pod 'TQLocationConverter', :path => '../TQLocationConverter'`. This version is distributed through its Git tag and has not been published to CocoaPods trunk, so keep both `:git` and `:tag`. The native Swift implementation is distributed through SwiftPM.
@@ -109,6 +109,8 @@ if (!CLLocationCoordinate2DIsValid(result)) {
 Failure returns `kCLLocationCoordinate2DInvalid` and optionally sets `NSError`. Success clears a supplied error pointer. Invalid enum values report `TQConversionErrorInvalidOption`. Legacy methods have no error parameter and return the invalid sentinel on failure.
 
 ## Migration
+
+- **1.0.1 directory change:** Objective-C sources move into `Sources/TQLocationConverterObjC/`, with public headers in its `include/` directory. Projects referencing repository files directly must update those paths. SwiftPM/CocoaPods product names, header names and call sites stay the same. The `1.0.0` tag retains the original root layout.
 
 - The four existing conversion methods and `isLocationOutOfChina:` retain their signatures; direct WGS‑84 ⇄ Baidu methods are added.
 - **Legacy conversions still do not check the region automatically.** Choose a policy explicitly when adopting the new API.

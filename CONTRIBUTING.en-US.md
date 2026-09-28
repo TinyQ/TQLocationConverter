@@ -37,6 +37,13 @@ CI uses Xcode 16.4 to check the declared minimum deployment targets; a build che
 
 The repository check inspects Git's tracked files and rejects `.DS_Store`, build caches and personal IDE settings, including files added using `git add -f`.
 
+## Source layout
+
+- `Sources/TQLocationConverter/`: native Swift implementation and DocC.
+- `Sources/TQLocationConverterObjC/`: Objective-C implementation; `include/` holds public headers and the SwiftPM umbrella header.
+- `Tests/`: automated tests and independent consumers.
+- `Test/`: legacy iOS example; CI builds its app and test bundle.
+
 ## Algorithm changes
 
 1. Identify whether the change affects the forward model, inverse solver or region policy. Round-trip error is not geographic accuracy.

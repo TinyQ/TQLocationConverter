@@ -41,8 +41,8 @@
 		E098D7781D522BBA00F55BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E098D77B1D522BBA00F55BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E098D77D1D522BBA00F55BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E098D7831D522C1600F55BC1 /* TQLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TQLocationConverter.h; path = ../TQLocationConverter.h; sourceTree = "<group>"; };
-		E098D7841D522C1600F55BC1 /* TQLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TQLocationConverter.m; path = ../TQLocationConverter.m; sourceTree = "<group>"; };
+		E098D7831D522C1600F55BC1 /* TQLocationConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TQLocationConverter.h; path = ../Sources/TQLocationConverterObjC/include/TQLocationConverter.h; sourceTree = "<group>"; };
+		E098D7841D522C1600F55BC1 /* TQLocationConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TQLocationConverter.m; path = ../Sources/TQLocationConverterObjC/TQLocationConverter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

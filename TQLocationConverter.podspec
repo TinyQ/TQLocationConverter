@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'TQLocationConverter'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
   s.summary = 'Offline WGS-84, GCJ-02 and BD-09LL conversion for Apple platforms.'
   s.description = 'Objective-C coordinate conversion with validation, explicit region policies, and refined numerical inverses. Native Swift support is available through Swift Package Manager.'
   s.homepage = 'https://github.com/TinyQ/TQLocationConverter'
@@ -13,8 +13,9 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = '13.0'
   s.watchos.deployment_target = '6.0'
   s.visionos.deployment_target = '1.0'
-  s.source_files = 'TQLocationConverter.{h,m}'
-  s.public_header_files = 'TQLocationConverter.h'
+  s.source_files = 'Sources/TQLocationConverterObjC/TQLocationConverter.m',
+                   'Sources/TQLocationConverterObjC/include/TQLocationConverter.h'
+  s.public_header_files = 'Sources/TQLocationConverterObjC/include/TQLocationConverter.h'
   s.frameworks = 'Foundation', 'CoreLocation'
   s.requires_arc = true
 end

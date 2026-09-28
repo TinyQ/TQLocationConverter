@@ -83,14 +83,14 @@ Swift 抛出 `ConversionError`：
 
 **SwiftPM：**选择独立产品 `TQLocationConverterObjC`，使用 `@import TQLocationConverterObjC;`。原生 Swift 产品与 Objective‑C 产品相互独立，无需一起链接。
 
-**手动集成：**将仓库根目录的 `TQLocationConverter.h` 和 `.m` 加入应用 target，并链接 Foundation、CoreLocation。无需 UIKit；建议启用 ARC。
+**手动集成：**将 [TQLocationConverter.h](../Sources/TQLocationConverterObjC/include/TQLocationConverter.h) 和 [TQLocationConverter.m](../Sources/TQLocationConverterObjC/TQLocationConverter.m) 复制到应用中并加入 target，链接 Foundation、CoreLocation。两份文件可放在应用的同一目录；无需复制 SwiftPM 的 umbrella header。无需 UIKit；建议启用 ARC。
 
 **CocoaPods：**从 Git 标签安装 Objective-C 实现：
 
 ```ruby
 pod 'TQLocationConverter',
     :git => 'https://github.com/TinyQ/TQLocationConverter.git',
-    :tag => '1.0.0'
+    :tag => '1.0.1'
 ```
 
 运行 `pod install` 后打开生成的 `.xcworkspace`。本地开发可改用 `pod 'TQLocationConverter', :path => '../TQLocationConverter'`。此版本使用 Git 标签分发，尚未发布到 CocoaPods trunk，因此请保留 `:git` 和 `:tag`。Swift 实现使用 SwiftPM 分发。
@@ -109,6 +109,8 @@ if (!CLLocationCoordinate2DIsValid(result)) {
 失败返回 `kCLLocationCoordinate2DInvalid`，并按需设置 `NSError`；成功会清空传入的错误指针。非法枚举值产生 `TQConversionErrorInvalidOption`。旧接口没有错误参数，失败同样返回无效坐标哨兵。
 
 ## 迁移旧版本
+
+- **1.0.1 目录调整：**Objective-C 源码迁入 `Sources/TQLocationConverterObjC/`，公开头文件位于其 `include/` 下。手动引用仓库文件的项目需更新文件路径；SwiftPM、CocoaPods 的产品名、头文件名和调用方式不变。`1.0.0` 标签仍保留原来的根目录布局。
 
 - 原有四个转换方法与 `isLocationOutOfChina:` 签名保留，并新增 WGS‑84 ⇄ 百度的组合方法。
 - **旧转换方法仍不自动判断地域。** 换用新接口时需明确选取地域策略，不能假定默认行为相同。

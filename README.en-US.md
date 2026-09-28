@@ -25,11 +25,11 @@ In Xcode, choose **File → Add Package Dependencies** and enter:
 https://github.com/TinyQ/TQLocationConverter.git
 ```
 
-Select **Up to Next Major Version** with minimum version `1.0.0`. In `Package.swift`, use a semantic version dependency:
+Select **Up to Next Major Version** with minimum version `1.0.1`. In `Package.swift`, use a semantic version dependency:
 
 ```swift
 // In your Package.swift:
-.package(url: "https://github.com/TinyQ/TQLocationConverter.git", from: "1.0.0")
+.package(url: "https://github.com/TinyQ/TQLocationConverter.git", from: "1.0.1")
 // In the consuming target's dependencies:
 .product(name: "TQLocationConverter", package: "TQLocationConverter")
 ```
