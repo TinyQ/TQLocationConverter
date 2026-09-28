@@ -85,13 +85,15 @@ Swift 抛出 `ConversionError`：
 
 **手动集成：**将仓库根目录的 `TQLocationConverter.h` 和 `.m` 加入应用 target，并链接 Foundation、CoreLocation。无需 UIKit；建议启用 ARC。
 
-**CocoaPods：**当前可用本地 checkout 验证：
+**CocoaPods：**从 Git 标签安装 Objective-C 实现：
 
 ```ruby
-pod 'TQLocationConverter', :path => '../TQLocationConverter'
+pod 'TQLocationConverter',
+    :git => 'https://github.com/TinyQ/TQLocationConverter.git',
+    :tag => '1.0.0'
 ```
 
-podspec 为未来 `1.0.0` 做了准备，源 tag 为 `1.0.0`；目前尚未创建该 tag 或发布到 trunk。不要在未发布时依赖 `pod 'TQLocationConverter', '~> 1.0'`。Swift 实现使用 SwiftPM 分发。
+运行 `pod install` 后打开生成的 `.xcworkspace`。本地开发可改用 `pod 'TQLocationConverter', :path => '../TQLocationConverter'`。此版本使用 Git 标签分发，尚未发布到 CocoaPods trunk，因此请保留 `:git` 和 `:tag`。Swift 实现使用 SwiftPM 分发。
 
 ```objc
 NSError *error = nil;

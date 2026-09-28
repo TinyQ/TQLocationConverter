@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/TinyQ/TQLocationConverter'
   s.license = { :type => 'MIT', :file => 'LICENSE' }
   s.author = { 'qfu' => 'tinyqf@gmail.com' }
-  # Prepared for the first modern release. Create this tag only after validation and review.
+  # Release tags match the version exactly, without a v prefix.
   s.source = { :git => 'https://github.com/TinyQ/TQLocationConverter.git', :tag => s.version.to_s }
   s.ios.deployment_target = '13.0'
   s.osx.deployment_target = '10.15'
